@@ -1,0 +1,134 @@
+{
+  "personal": {
+    "name": "Vu The Tam",
+    "nameDisplay": "VU THE TAM",
+    "title": "BACKEND DEVELOPER INTERN",
+    "avatar": "assets/images/avatar.jpg",
+    "bio": "I am a final-year IT student at Ho Chi Minh City University of Education, focusing on learning and building the foundation of backend systems. Currently, I am practicing how to create efficient APIs and manage databases. I am looking for my first opportunity to learn from experienced mentors and contribute to real-world projects.",
+    "seekingRole": "Backend Developer Intern",
+    "email": "tamvt205@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/tamvt205",
+    "github": "https://github.com/vuthetam"
+  },
+  "skills": [
+    {
+      "id": "languages",
+      "icon": "terminal",
+      "title": "Languages & Frameworks",
+      "items": ["Node.js (Express)", "JavaScript", "TypeScript", "Angular (Frontend)"]
+    },
+    {
+      "id": "databases",
+      "icon": "database",
+      "title": "Databases",
+      "items": ["SQL Server", "MySQL", "PostgreSQL", "MongoDB", "Redis"]
+    },
+    {
+      "id": "tools",
+      "icon": "construction",
+      "title": "Tools",
+      "items": ["Git", "GitHub", "Postman"]
+    },
+    {
+      "id": "specialties",
+      "icon": "verified_user",
+      "title": "Specialties",
+      "items": ["JWT (Auth Rotation)", "WebRTC", "WebSocket", "RESTful API"]
+    }
+  ],
+  "projects": [
+    {
+      "id": "chatpigeons",
+      "title": "Social Networking Platform",
+      "image": "assets/images/pigeons.png",
+      "imageAlt": "Abstract messaging app interface",
+      "description": "A high-performance communication platform featuring real-time messaging, AI-powered message summaries, and a hybrid WebRTC architecture for high-quality video calls.",
+      "link": "https://github.com/hcmue-hmduck/ChatApps_Pigeons",
+      "live": "https://chatappspigeons.onrender.com",
+      "contributions": [
+        { "label": "Hybrid WebRTC", "detail": "Implemented P2P for 1-1 calls and SFU (LiveKit Cloud) for scalable group video conferencing." },
+        { "label": "Advanced Security", "detail": "Developed JWT-based authentication with token rotation and anomaly detection." },
+        { "label": "Reliable Verification", "detail": "Developed the user onboarding flow featuring secure email OTP verification via Resend API." },
+        { "label": "AI Summarization", "detail": "Integrated AI services to provide automated summaries for unread messages." }
+      ],
+      "techStack": ["Angular", "Node.js", "Express.js", "Socket.IO", "WebRTC", "LiveKit", "PostgreSQL", "Redis", "JWT", "Resend"]
+    },
+    {
+      "id": "bookstore",
+      "title": "Book Store",
+      "image": "assets/images/bookstore.png",
+      "imageAlt": "Modern online bookstore interface",
+      "description": "Developed a server-side e-commerce platform that supports both automated online shopping and manual order creation for walk-in customers. Integrated AI-driven assistance and a comprehensive back-office system for inventory control.",
+      "link": "https://github.com/vuthetam/BookStore",
+      "live": "https://bookstore-62fk.onrender.com",
+      "contributions": [
+        { "label": "Core Database", "detail": "Designed the MySQL schema for most of the system." },
+        { "label": "Inventory", "detail": "Developed logic and UI for stock import, export, and control." },
+        { "label": "Sales", "detail": "Built the order processing, invoice generation, and direct sales modules." },
+        { "label": "Staffing", "detail": "Implemented staff account management and access control." },
+        { "label": "Analytics", "detail": "Developed data statistics and reporting features." }
+      ],
+      "techStack": ["Node.js", "ExpressJS", "MySQL", "EJS"]
+    }
+  ],
+  "certificates": [
+    {
+      "id": "aws-lambda",
+      "title": "AWS Lambda Foundations",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg",
+      "pdf": "assets/certificates/AWSLambdaFoundation.pdf"
+    },
+    {
+      "id": "devops-cicd",
+      "title": "DevOps Foundations: CI/CD",
+      "image": "https://media.licdn.com/dms/image/v2/D560BAQGsRQptMgm1pg/company-logo_200_200/company-logo_200_200/0/1719260989074/linkedin_learning_logo?e=2147483647&v=beta&t=FqEQGmfTIUklkOxFh4AW1YR6r5sLPLFCf88b_MsxnM0",
+      "pdf": "assets/certificates/DevOpsFoundationCICD.pdf"
+    },
+    {
+      "id": "devops-foundations",
+      "title": "DevOps Foundations",
+      "image": "https://media.licdn.com/dms/image/v2/D560BAQGsRQptMgm1pg/company-logo_200_200/company-logo_200_200/0/1719260989074/linkedin_learning_logo?e=2147483647&v=beta&t=FqEQGmfTIUklkOxFh4AW1YR6r5sLPLFCf88b_MsxnM0",
+      "pdf": "assets/certificates/DevOpsFoundations.pdf"
+    },
+    {
+      "id": "i2cs",
+      "title": "I2CS — Cybersecurity (Cisco)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/800px-Cisco_logo_blue_2016.svg.png",
+      "pdf": "assets/certificates/I2CSUpdate20260413-31-otdeji.pdf"
+    },
+    {
+      "id": "docker",
+      "title": "Learning Docker",
+      "image": "https://media.licdn.com/dms/image/v2/D560BAQGsRQptMgm1pg/company-logo_200_200/company-logo_200_200/0/1719260989074/linkedin_learning_logo?e=2147483647&v=beta&t=FqEQGmfTIUklkOxFh4AW1YR6r5sLPLFCf88b_MsxnM0",
+      "pdf": "assets/certificates/LearningDocker.pdf"
+    },
+    {
+      "id": "nodejs-design",
+      "title": "Node.js Design Patterns",
+      "image": "https://media.licdn.com/dms/image/v2/D560BAQGsRQptMgm1pg/company-logo_200_200/company-logo_200_200/0/1719260989074/linkedin_learning_logo?e=2147483647&v=beta&t=FqEQGmfTIUklkOxFh4AW1YR6r5sLPLFCf88b_MsxnM0",
+      "pdf": "assets/certificates/Node.jsDesignPatterns.pdf"
+    },
+    {
+      "id": "nodejs-security",
+      "title": "Node.js Security",
+      "image": "https://media.licdn.com/dms/image/v2/D560BAQGsRQptMgm1pg/company-logo_200_200/company-logo_200_200/0/1719260989074/linkedin_learning_logo?e=2147483647&v=beta&t=FqEQGmfTIUklkOxFh4AW1YR6r5sLPLFCf88b_MsxnM0",
+      "pdf": "assets/certificates/Node.jsSecurity.pdf"
+    },
+    {
+      "id": "redis",
+      "title": "Redis Essential Training",
+      "image": "https://media.licdn.com/dms/image/v2/D560BAQGsRQptMgm1pg/company-logo_200_200/company-logo_200_200/0/1719260989074/linkedin_learning_logo?e=2147483647&v=beta&t=FqEQGmfTIUklkOxFh4AW1YR6r5sLPLFCf88b_MsxnM0",
+      "pdf": "assets/certificates/RedisEssentialTraining.pdf"
+    },
+    {
+      "id": "software-arch",
+      "title": "Software Architecture Patterns",
+      "image": "https://media.licdn.com/dms/image/v2/D560BAQGsRQptMgm1pg/company-logo_200_200/company-logo_200_200/0/1719260989074/linkedin_learning_logo?e=2147483647&v=beta&t=FqEQGmfTIUklkOxFh4AW1YR6r5sLPLFCf88b_MsxnM0",
+      "pdf": "assets/certificates/SoftwareArchitecturePatternsForDevelopers.pdf"
+    }
+  ],
+  "footer": {
+    "year": "2026",
+    "builtWith": ["Tailwind CSS", "GitHub Pages"]
+  }
+}

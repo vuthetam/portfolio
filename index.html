@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Vũ Thế Tâm – Aspiring Backend Developer. Node.js, Express, PostgreSQL, WebRTC, JWT specialist seeking internship opportunities." />
+  <title>Vũ Thế Tâm | Backend Developer Portfolio</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <!-- PDF.js — renders first page of each cert PDF as canvas thumbnail -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <!-- ── Tailwind config using CSS variable colors ──────────── -->
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "background":               "rgb(var(--c-bg)           / <alpha-value>)",
+            "surface-container-lowest": "rgb(var(--c-sc-lowest)    / <alpha-value>)",
+            "surface-container-low":    "rgb(var(--c-sc-low)       / <alpha-value>)",
+            "surface-container":        "rgb(var(--c-sc)           / <alpha-value>)",
+            "surface-container-high":   "rgb(var(--c-sc-high)      / <alpha-value>)",
+            "surface-container-highest":"rgb(var(--c-sc-highest)   / <alpha-value>)",
+            "on-surface":               "rgb(var(--c-on-surface)   / <alpha-value>)",
+            "on-surface-variant":       "rgb(var(--c-on-surface-var)/ <alpha-value>)",
+            "outline":                  "rgb(var(--c-outline)      / <alpha-value>)",
+            "outline-variant":          "rgb(var(--c-outline-var)  / <alpha-value>)",
+            "primary":                  "rgb(var(--c-primary)      / <alpha-value>)",
+            "on-primary":               "rgb(var(--c-on-primary)   / <alpha-value>)",
+            "tertiary":                 "rgb(var(--c-tertiary)     / <alpha-value>)",
+            "on-tertiary":              "rgb(var(--c-on-tertiary)  / <alpha-value>)",
+          },
+          fontFamily: {
+            headline: ["Manrope", "sans-serif"],
+            body:     ["Inter",   "sans-serif"],
+            label:    ["Inter",   "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.125rem",
+            lg:  "0.25rem",
+            xl:  "0.5rem",
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* ── Theme color tokens ─────────────────────────────────── */
+    /* Light theme — subtle blue-lavender bg + blue primary + pink tertiary */
+    :root {
+      --c-bg:             244 245 255;   /* #f4f5ff */
+      --c-sc-lowest:      255 255 255;   /* #ffffff  */
+      --c-sc-low:         234 235 248;   /* #eaebf8  */
+      --c-sc:             228 229 242;   /* #e4e5f2  */
+      --c-sc-high:        220 222 238;   /* #dcdee e  */
+      --c-sc-highest:     212 214 232;   /* #d4d6e8  */
+      --c-on-surface:     26  27  46;    /* #1a1b2e  */
+      --c-on-surface-var: 68  71  90;    /* #44475a  */
+      --c-outline:        117 120 147;   /* #757893  */
+      --c-outline-var:    196 198 216;   /* #c4c6d8  */
+      --c-primary:        59  91  219;   /* #3b5bdb  blue   */
+      --c-on-primary:     255 255 255;   /* #ffffff         */
+      --c-tertiary:       214 51  132;   /* #d63384  pink   */
+      --c-on-tertiary:    255 255 255;   /* #ffffff         */
+    }
+
+    /* Dark theme — original Stitch palette */
+    .dark {
+      --c-bg:             17  19  23;    /* #111317  */
+      --c-sc-lowest:      12  14  18;    /* #0c0e12  */
+      --c-sc-low:         26  28  32;    /* #1a1c20  */
+      --c-sc:             30  32  36;    /* #1e2024  */
+      --c-sc-high:        40  42  46;    /* #282a2e  */
+      --c-sc-highest:     51  53  57;    /* #333539  */
+      --c-on-surface:     226 226 232;   /* #e2e2e8  */
+      --c-on-surface-var: 198 198 205;   /* #c6c6cd  */
+      --c-outline:        144 144 151;   /* #909097  */
+      --c-outline-var:    69  70  77;    /* #45464d  */
+      --c-primary:        188 199 222;   /* #bcc7de  blue-grey */
+      --c-on-primary:     38  49  67;    /* #263143           */
+      --c-tertiary:       210 187 255;   /* #d2bbff  lavender */
+      --c-on-tertiary:    63  0   142;   /* #3f008e           */
+    }
+
+    /* ── Base ───────────────────────────────────────────────── */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: rgb(var(--c-bg));
+      color: rgb(var(--c-on-surface));
+    }
+
+    /* ── Scrollbar ──────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track  { background: rgb(var(--c-bg)); }
+    ::-webkit-scrollbar-thumb  { background: rgb(var(--c-outline-var)); border-radius: 10px; }
+
+    /* ── Certificate slider ─────────────────────────────────── */
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .draggable-slider {
+      cursor: grab;
+      user-select: none;
+      overflow: hidden;
+      width: 100%;
+    }
+    .draggable-slider:active { cursor: grabbing; }
+
+    .marquee-inner {
+      display: flex;
+      width: max-content;
+      gap: 1.5rem;
+    }
+
+    /* ── Theme-toggle icon helpers ──────────────────────────── */
+    .icon-dark  { display: inline-block; }
+    .icon-light { display: none; }
+    .dark .icon-dark  { display: none; }
+    .dark .icon-light { display: inline-block; }
+
+    /* ── Loading skeleton pulse ─────────────────────────────── */
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+    @keyframes spin  { to { transform: rotate(360deg); } }
+    .skeleton {
+      border-radius: 0.5rem;
+      background: rgb(var(--c-sc-high));
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    /* ── Anchor-link smooth scroll (handled by JS below) ────── */
+    /* html { scroll-behavior: smooth } — disabled; JS cubic-ease-out used instead */
+
+    /* ── Scroll-to-top button ────────────────────────────────── */
+    #scroll-top-btn {
+      opacity: 0;
+      transform: translateY(1rem);
+      pointer-events: none;
+      transition:
+        opacity   0.35s ease,
+        transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    #scroll-top-btn.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* ── Submit toast notification ──────────────────────────────── */
+    #form-toast {
+      position: fixed;
+      bottom: 5rem;
+      right: 1.5rem;
+      z-index: 60;
+      padding: 0.875rem 1.25rem;
+      border-radius: 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      opacity: 0;
+      transform: translateY(1rem);
+      pointer-events: none;
+      transition:
+        opacity   0.35s ease,
+        transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    #form-toast.show   { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    #form-toast.success { background: rgb(var(--c-tertiary)); color: rgb(var(--c-on-tertiary)); }
+    #form-toast.error   { background: #ef4444; color: #fff; }
+  </style>
+
+  <!-- Prevent FOUC — runs synchronously before paint -->
+  <script>
+    (function () {
+      var stored = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (stored === 'dark' || (!stored && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+
+    function toggleTheme() {
+      var isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+  </script>
+</head>
+
+<!-- ============================================================ -->
+<body class="selection:bg-tertiary selection:text-on-tertiary">
+
+  <!-- ═══════════════════ HEADER / NAV ════════════════════════ -->
+  <header class="relative w-full bg-background border-b border-outline-variant/10 px-6 md:px-8">
+    <nav class="flex flex-col sm:flex-row items-center w-full py-6 max-w-7xl mx-auto gap-6 sm:gap-8 sm:justify-between">
+
+      <!-- Avatar -->
+      <div class="flex-shrink-0">
+        <div class="w-24 sm:w-28 h-24 sm:h-28 rounded-full overflow-hidden ring-2 ring-primary/20 aspect-square hover:ring-primary/50 hover:scale-105 transition-all duration-300 cursor-pointer">
+          <a id="nav-avatar-link" href="#" target="_blank" rel="noopener noreferrer" class="block w-full h-full" aria-label="Open avatar image in new tab">
+            <img id="nav-avatar" src="" alt="Vũ Thế Tâm" class="w-full h-full object-cover" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Name + nav links -->
+      <div class="flex flex-col sm:items-start justify-center">
+        <h1 id="nav-name" class="text-xl font-extrabold tracking-tight text-on-surface font-headline uppercase">
+          <span class="skeleton inline-block w-32 h-5">&nbsp;</span>
+        </h1>
+        <div class="w-6 h-1 bg-primary mt-1.5 mb-3 hidden sm:block"></div>
+        <nav aria-label="Site navigation" class="flex flex-wrap justify-center sm:justify-start items-center gap-4 sm:gap-6 mt-2 sm:mt-0">
+          <a class="text-[10px] sm:text-xs tracking-[0.15em] font-bold text-on-surface hover:text-primary transition-colors duration-300 uppercase" href="#skills">Skills</a>
+          <a class="text-[10px] sm:text-xs tracking-[0.15em] font-bold text-on-surface hover:text-primary transition-colors duration-300 uppercase" href="#projects">Projects</a>
+          <a class="text-[10px] sm:text-xs tracking-[0.15em] font-bold text-on-surface hover:text-primary transition-colors duration-300 uppercase" href="#certificates">Certificates</a>
+          <a class="text-[10px] sm:text-xs tracking-[0.15em] font-bold text-on-surface hover:text-primary transition-colors duration-300 uppercase" href="#contact">Contact</a>
+        </nav>
+      </div>
+
+      <!-- Theme toggle (Desktop) -->
+      <div class="hidden sm:flex items-center ml-auto">
+        <button
+          id="theme-toggle-btn"
+          aria-label="Toggle theme"
+          onclick="toggleTheme()"
+          class="p-2 rounded-full bg-surface-container-high hover:bg-surface-container-highest border border-outline-variant/20 text-on-surface transition-all duration-300 flex items-center justify-center">
+          <span class="material-symbols-outlined icon-dark">dark_mode</span>
+          <span class="material-symbols-outlined icon-light">light_mode</span>
+        </button>
+      </div>
+
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ═══════════════════ HERO ═════════════════════════════ -->
+    <section class="relative flex flex-col justify-center px-6 md:px-8 w-full pt-12 md:pt-20 pb-16 md:pb-20">
+      <div class="max-w-7xl mx-auto w-full">
+        <div class="max-w-4xl space-y-6">
+          <span id="hero-title-tag" class="text-xl font-black tracking-[0.3em] text-tertiary uppercase font-label block">
+            <span class="skeleton inline-block w-48 h-3">&nbsp;</span>
+          </span>
+          <p id="hero-bio" class="text-base sm:text-lg md:text-xl text-on-surface-variant max-w-2xl font-light leading-relaxed">
+            <span class="skeleton block h-4 mb-2">&nbsp;</span>
+            <span class="skeleton block h-4 mb-2 w-5/6">&nbsp;</span>
+            <span class="skeleton block h-4 w-4/6">&nbsp;</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ SKILLS ════════════════════════════ -->
+    <section id="skills" class="py-16 md:py-24 px-6 md:px-8 bg-surface-container-low">
+      <div class="max-w-7xl mx-auto w-full">
+        <div class="mb-10 md:mb-12">
+          <span class="text-xl font-black tracking-[0.3em] text-tertiary uppercase block mb-2 font-label">TECHNICAL STACK</span>
+          <h2 class="text-3xl md:text-4xl font-headline font-bold text-on-surface">Skills &amp; Expertise</h2>
+        </div>
+        <div id="skills-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ PROJECTS ══════════════════════════ -->
+    <section id="projects" class="py-16 md:py-20 px-6 md:px-8">
+      <div class="max-w-7xl mx-auto w-full">
+        <div class="mb-10 md:mb-12">
+          <span class="text-xl font-black tracking-[0.3em] text-tertiary uppercase block mb-2 font-label">FEATURED WORKS</span>
+          <h2 class="text-3xl md:text-4xl font-headline font-bold text-on-surface">Selected Projects</h2>
+        </div>
+        <div id="projects-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 items-stretch">
+          <!-- populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ CERTIFICATES ═════════════════════ -->
+    <section id="certificates" class="px-6 md:px-8 bg-surface-container-low py-16 md:py-20">
+      <div class="max-w-7xl mx-auto w-full mb-10">
+        <span class="text-xl font-black tracking-[0.3em] text-tertiary uppercase block mb-2 font-label">QUALIFICATIONS</span>
+        <h2 class="text-3xl md:text-4xl font-headline font-bold text-on-surface">Professional Certifications</h2>
+      </div>
+      <div class="relative max-w-7xl mx-auto w-full">
+        <div class="draggable-slider" id="certificate-slider">
+          <div class="marquee-inner" id="marquee-inner">
+            <!-- populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ CONTACT ═══════════════════════════ -->
+    <section id="contact" class="py-20 md:py-32 px-6 md:px-8 w-full">
+      <div class="max-w-7xl mx-auto w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+
+        <!-- Left — contact info -->
+        <div class="space-y-8 md:space-y-10">
+          <div>
+            <span class="text-xl font-black tracking-[0.3em] text-tertiary uppercase block mb-2">Get in touch</span>
+            <h2 class="text-3xl md:text-4xl font-headline font-bold text-on-surface">
+              Let's build <br class="hidden sm:block" /> something amazing.
+            </h2>
+          </div>
+          <p id="contact-seeking" class="text-on-surface-variant leading-relaxed max-w-md"></p>
+          <div id="contact-links" class="space-y-6 pt-4">
+            <!-- populated by JS -->
+          </div>
+        </div>
+
+        <!-- Right — contact form -->
+        <div class="bg-surface-container-low p-6 sm:p-10 rounded-2xl border border-outline-variant/10 shadow-2xl">
+          <!-- Formspree AJAX form -->
+          <form id="contact-form" class="space-y-6">
+            <!-- Honeypot field — hidden from humans, traps bots -->
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+            <!-- Email subject shown in inbox — helps avoid spam filters -->
+            <input type="hidden" name="_subject" value="📬 New message from portfolio contact form" />
+            <!-- Reply-to set by JS to match the sender's email -->
+            <input type="hidden" id="form-replyto" name="_replyto" value="" />
+
+            <div class="space-y-2">
+              <label class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant ml-1" for="contact-name">Full Name</label>
+              <input id="contact-name" name="name" type="text" placeholder="John Doe" required
+                class="w-full bg-surface-container-lowest border-none rounded-xl p-4 focus:ring-1 focus:ring-tertiary text-on-surface placeholder:text-on-surface-variant/30 transition-all text-sm" />
+            </div>
+            <div class="space-y-2">
+              <label class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant ml-1" for="contact-email">Email Address</label>
+              <input id="contact-email" name="email" type="email" placeholder="example@gmail.com" required
+                class="w-full bg-surface-container-lowest border-none rounded-xl p-4 focus:ring-1 focus:ring-tertiary text-on-surface placeholder:text-on-surface-variant/30 transition-all text-sm" />
+            </div>
+            <div class="space-y-2">
+              <label class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant ml-1" for="contact-message">Your Message</label>
+              <textarea id="contact-message" name="message" rows="4" placeholder="Hello, I'd like to discuss..." required
+                class="w-full bg-surface-container-lowest border-none rounded-xl p-4 focus:ring-1 focus:ring-tertiary text-on-surface placeholder:text-on-surface-variant/30 transition-all text-sm"></textarea>
+            </div>
+            <button id="contact-submit" type="submit"
+              class="w-full py-4 bg-tertiary text-on-tertiary font-bold rounded-xl hover:opacity-90 transition-all active:scale-[0.98] text-sm flex items-center justify-center gap-2">
+              <span id="submit-label">Send</span>
+            </button>
+          </form>
+        </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Mobile Theme Toggle ──────────────────────────────── -->
+  <button
+    id="theme-toggle-btn-mobile"
+    aria-label="Toggle theme"
+    onclick="toggleTheme()"
+    class="sm:hidden fixed bottom-20 right-6 z-50 w-11 h-11 rounded-full bg-surface-container-high border border-outline-variant/20 text-on-surface shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
+  >
+    <span class="material-symbols-outlined icon-dark text-xl">dark_mode</span>
+    <span class="material-symbols-outlined icon-light text-xl">light_mode</span>
+  </button>
+
+  <!-- ── Scroll-to-top button ─────────────────────────────── -->
+  <button
+    id="scroll-top-btn"
+    aria-label="Scroll to top"
+    class="fixed bottom-6 right-6 z-50 w-11 h-11 rounded-full bg-tertiary text-on-tertiary shadow-lg flex items-center justify-center hover:scale-110 hover:shadow-xl active:scale-95"
+  >
+    <span class="material-symbols-outlined text-xl">arrow_upward</span>
+  </button>
+
+  <!-- ── Submit toast ──────────────────────────────────────── -->
+  <div id="form-toast" role="alert" aria-live="polite">
+    <span id="toast-icon" class="material-symbols-outlined text-xl"></span>
+    <span id="toast-msg"></span>
+  </div>
+
+  <!-- ═══════════════════ FOOTER ════════════════════════════ -->
+  <footer class="bg-surface-container-low py-8 md:py-6 px-6 md:px-8 border-t border-outline-variant/15">
+    <div id="footer-content" class="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto gap-8 text-center md:text-left">
+      <!-- populated by JS -->
+    </div>
+  </footer>
+
+  <!-- ═══════════════════ SCRIPTS ═══════════════════════════ -->
+  <script src="script.js" defer></script>
+
+</body>
+</html>
